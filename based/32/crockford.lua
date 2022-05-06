@@ -1,4 +1,4 @@
-local base32 = require 'base32'
+local generic = require 'based.32.generic'
 
 local crockford = {}
 
@@ -20,11 +20,11 @@ local decode_lookup = {
 }
 
 function crockford.encode(data)
-	return base32.encode(data, encode_lookup)
+	return generic.encode(data, encode_lookup)
 end
 
 function crockford.decode(data)
-	return base32.decode(data, decode_lookup)
+	return generic.decode(data, decode_lookup)
 end
 
 return crockford
