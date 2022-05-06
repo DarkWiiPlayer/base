@@ -1,15 +1,15 @@
 local hex = {}
 
 function hex.encode(data)
-	return data:gsub(".", function(char)
-		return string.format('%02x', char)
-	end)
+	return (data:gsub(".", function(char)
+		return string.format('%02x', char:byte())
+	end))
 end
 
 function hex.decode(data)
-	return data:gsub("%x%x", function(byte)
+	return (data:gsub("%x%x", function(byte)
 		return string.char(tonumber(byte, 16))
-	end)
+	end))
 end
 
 return hex
