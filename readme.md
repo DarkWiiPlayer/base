@@ -23,4 +23,6 @@ Currently implemented:
 
 - Base16 aka. Hexadecimal
 - Base32
-  - Crockford's
+	- Crockford's
+- Base64
+	- RFC 4648
