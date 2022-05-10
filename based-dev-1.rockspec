@@ -21,7 +21,7 @@ build = {
 		["based.16.hex"] = "based/16/hex.lua",
 		["based.32.crockford"] = "based/32/crockford.lua",
 		["based.32.generic"] = "based/32/generic.lua",
-		["based.64.generic"] = "based/32/generic.lua",
-		["based.64.rfc"] = "based/32/generic.lua",
+		["based.64.generic"] = "based/64/generic.lua",
+		["based.64.rfc"] = "based/64/rfc.lua",
 	}
 }
