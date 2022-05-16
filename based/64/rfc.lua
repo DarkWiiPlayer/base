@@ -29,21 +29,26 @@ local decode_lookup = {
 -- 	io.write(i%8==0 and ",\n" or ", ")
 -- end
 
+--- Encodes a binary string into Base64
+-- @tparam string data A string treated as binary data
+-- @treturn string The Base64 encoded input data
 function rfc.encode(data)
 	local output = generic.encode(data, encode_lookup, "=")
 	return output .. string.rep("=", (4 - #output) % 4)
 end
 
+--- Decodes a Base64-encoded binary string
+-- @tparam string data Base64 encoded data
+-- @treturn string The decoded input data
+-- @treturn boolean `true` if the input data was correctly padded, `false` otherwise
 function rfc.decode(data)
-	if #data % 4 > 0 then
-		return nil, "Base64 string incorrectly padded!"
-	else
-		local first_pad = data:find("=", 1, true)
-		if first_pad then
-			data = data:sub(1, first_pad - 1)
-		end
+	local first_pad = data:find("=", 1, true)
+
+	if first_pad then
+		data = data:sub(1, first_pad - 1)
 	end
-	return generic.decode(data, decode_lookup, "=")
+
+	return generic.decode(data, decode_lookup), #data % 4 > 0
 end
 
 return rfc

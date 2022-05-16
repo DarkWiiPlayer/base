@@ -19,10 +19,16 @@ print(decoded)
 assert(input == decoded)
 ```
 
-Currently implemented:
+## Currently implemented:
 
-- Base16 aka. Hexadecimal
-- Base32
-	- Crockford's
-- Base64
-	- RFC 4648
+### Base16
+
+Plain old `0` to `F` Hexadecimal
+
+### Base32
+
+- Crockford's
+
+### Base64
+
+- RFC 4648

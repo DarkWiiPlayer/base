@@ -1,3 +1,5 @@
+--- Implements Crockford's Base32 encoding
+
 local generic = require 'based.32.generic'
 
 local crockford = {}
@@ -19,10 +21,16 @@ local decode_lookup = {
 	30, 31
 }
 
+--- Encodes a binary string into Base32
+-- @tparam string data A string treated as binary data
+-- @treturn string The Base32 encoded input data
 function crockford.encode(data)
 	return generic.encode(data, encode_lookup)
 end
 
+--- Decodes a Base32-encoded binary string
+-- @tparam string data Base32 encoded data
+-- @treturn string The decoded input data
 function crockford.decode(data)
 	return generic.decode(data, decode_lookup)
 end
