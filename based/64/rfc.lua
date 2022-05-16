@@ -36,7 +36,7 @@ end
 
 function rfc.decode(data)
 	if #data % 4 > 0 then
-		error("Base64 string incorrectly padded!", 1)
+		return nil, "Base64 string incorrectly padded!"
 	else
 		local first_pad = data:find("=", 1, true)
 		if first_pad then

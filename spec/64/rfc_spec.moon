@@ -20,10 +20,10 @@ describe 'base64', ->
 				assert.equal "bGlnaHQgdw==",     encode "light w"
 		describe 'Decoder', ->
 			it 'Detects incorrect padding', ->
-				assert.errors -> decode "bGlnaHQgd29yay4"
-				assert.errors -> decode "bGlnaHQgd29yaw"
-				assert.errors -> decode "bGlnaHQgd28"
-				assert.errors -> decode "bGlnaHQgdw"
+				assert.is.nil decode "bGlnaHQgd29yay4"
+				assert.is.nil decode "bGlnaHQgd29yaw"
+				assert.is.nil decode "bGlnaHQgd28"
+				assert.is.nil decode "bGlnaHQgdw"
 			it 'Decodes simple strings', ->
 				assert.equal "\0\0\0", decode("AAAA")
 				assert.equal "\xff\xff\xff", decode("////")
