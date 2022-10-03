@@ -39,9 +39,10 @@ end
 
 --- Decodes a Base64-encoded binary string
 -- @tparam string data Base64 encoded data
+-- @tparam[opt="string"] string Either 'string' or 'number' to specify what type to decode as
 -- @treturn string The decoded input data
 -- @treturn boolean `true` if the input data was correctly padded, `false` otherwise
-function rfc.decode(data)
+function rfc.decode(data, mode)
 	local first_pad = data:find("=", 1, true)
 
 	if first_pad then
