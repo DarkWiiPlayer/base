@@ -24,21 +24,31 @@ end
 
 function base32.encode(lookup, binary)
 	local buffer = {}
-	local length = math.ceil(#binary*8/5)
-	local acc = 0
-	local bits = length*5 - #binary*8
-	local buffer_pointer = length
-	for i=#binary, 1, -1 do
-		local byte = binary:byte(i)
-		acc = acc + byte * 2^bits
-		bits = bits + 8
-		while bits >=5 do
-			local b32 = (acc % 32)+1
-			acc = math.floor(acc / 32)
-			bits = bits - 5
-			buffer[buffer_pointer] = lookup:sub(b32, b32)
-			buffer_pointer = buffer_pointer-1
+	if type(binary) == "string" then
+		local length = math.ceil(#binary*8/5)
+		local acc = 0
+		local bits = length*5 - #binary*8
+		local buffer_pointer = length
+		for i=#binary, 1, -1 do
+			local byte = binary:byte(i)
+			acc = acc + byte * 2^bits
+			bits = bits + 8
+			while bits >=5 do
+				local b32 = (acc % 32)+1
+				acc = math.floor(acc / 32)
+				bits = bits - 5
+				buffer[buffer_pointer] = lookup:sub(b32, b32)
+				buffer_pointer = buffer_pointer-1
+			end
 		end
+	elseif type(binary) == "number" then
+		for i=10, 1, -1 do
+			local modulo = binary % 32
+			buffer[i] = lookup:sub(modulo + 1, modulo + 1)
+			binary = (binary - modulo) / 32
+		end
+	else
+		error("Cannot convert type, supported are 'string' and 'number', got " .. type(binary))
 	end
 	return table.concat(buffer)
 end
