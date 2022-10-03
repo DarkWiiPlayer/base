@@ -1,25 +1,35 @@
 local base32 = {}
 
-function base32.decode(lookup, input)
-	local buffer = {}
-	local length = math.floor(#input*5/8)
-	local bits = length*8 - #input*5
-	local acc = 0
-	local buffer_pointer = length
-	for i=#input, 1, -1 do
-		local word5 = lookup[input:byte(i)]
-		word5 = word5 * 2^bits
-		bits = bits + 5
-		acc = acc + word5
-		if bits >= 8 then
-			local b256 = acc % 256
-			acc = math.floor(acc/256)
-			bits = bits - 8
-			buffer[buffer_pointer] = string.char(b256)
-			buffer_pointer = buffer_pointer-1
+function base32.decode(lookup, input, mode)
+	if mode == "string" or mode == nil then
+		local buffer = {}
+		local length = math.floor(#input*5/8)
+		local bits = length*8 - #input*5
+		local acc = 0
+		local buffer_pointer = length
+		for i=#input, 1, -1 do
+			local word5 = lookup[input:byte(i)]
+			word5 = word5 * 2^bits
+			bits = bits + 5
+			acc = acc + word5
+			if bits >= 8 then
+				local b256 = acc % 256
+				acc = math.floor(acc/256)
+				bits = bits - 8
+				buffer[buffer_pointer] = string.char(b256)
+				buffer_pointer = buffer_pointer-1
+			end
 		end
+		return table.concat(buffer)
+	elseif mode == "number" then
+		local number = 0
+		for i=1, #input do
+			number = number * 32 + lookup[input:byte(i)]
+		end
+		return number
+	else
+		error("Cannot decode type, supported are 'string' (default) and 'number', got " .. mode)
 	end
-	return table.concat(buffer)
 end
 
 function base32.encode(lookup, binary)
@@ -48,7 +58,7 @@ function base32.encode(lookup, binary)
 			binary = (binary - modulo) / 32
 		end
 	else
-		error("Cannot convert type, supported are 'string' and 'number', got " .. type(binary))
+		error("Cannot encode type, supported are 'string' and 'number', got " .. type(binary))
 	end
 	return table.concat(buffer)
 end

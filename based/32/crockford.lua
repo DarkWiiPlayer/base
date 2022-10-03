@@ -30,9 +30,10 @@ end
 
 --- Decodes a Base32-encoded binary string
 -- @tparam string data Base32 encoded data
+-- @tparam[opt="string"] string Either 'string' or 'number' to specify what type to decode as
 -- @treturn string The decoded input data
-function crockford.decode(data)
-	return generic.decode(crockford.decode_lookup, data)
+function crockford.decode(data, mode)
+	return generic.decode(crockford.decode_lookup, data, mode)
 end
 
 return crockford
