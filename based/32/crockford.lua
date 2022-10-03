@@ -4,8 +4,8 @@ local generic = require 'based.32.generic'
 
 local crockford = {}
 
-local encode_lookup = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
-local decode_lookup = {
+crockford.encode_lookup = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
+crockford.decode_lookup = {
 	nil, nil, nil, nil, nil, nil, nil, nil, nil, nil,
 	nil, nil, nil, nil, nil, nil, nil, nil, nil, nil,
 	nil, nil, nil, nil, nil, nil, nil, nil, nil, nil,
@@ -25,14 +25,14 @@ local decode_lookup = {
 -- @tparam string data A string treated as binary data
 -- @treturn string The Base32 encoded input data
 function crockford.encode(data)
-	return generic.encode(encode_lookup, data)
+	return generic.encode(crockford.encode_lookup, data)
 end
 
 --- Decodes a Base32-encoded binary string
 -- @tparam string data Base32 encoded data
 -- @treturn string The decoded input data
 function crockford.decode(data)
-	return generic.decode(decode_lookup, data)
+	return generic.decode(crockford.decode_lookup, data)
 end
 
 return crockford
