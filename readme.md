@@ -7,7 +7,7 @@ A repository of Lua encoders and deoders for different string encodings.
 ```lua
 -- local baseX = require 'based.X.Y'
 -- Where X is the base (e.g. 32)
--- and Y is the mapping (e.g. Crockford's)
+-- and Y is the Alphabet (e.g. Crockford's)
 local base32 = require 'based.32.crockford'
 
 local input = io.read()
@@ -32,3 +32,4 @@ Plain old `0` to `F` Hexadecimal
 ### Base64
 
 - RFC 4648
+- RFC 4648 URL-Safe alphabet
