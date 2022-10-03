@@ -33,7 +33,7 @@ local decode_lookup = {
 -- @tparam string data A string treated as binary data
 -- @treturn string The Base64 encoded input data
 function rfc.encode(data)
-	local output = generic.encode(data, encode_lookup, "=")
+	local output = generic.encode(encode_lookup, data)
 	return output .. string.rep("=", (4 - #output) % 4)
 end
 
@@ -48,7 +48,7 @@ function rfc.decode(data)
 		data = data:sub(1, first_pad - 1)
 	end
 
-	return generic.decode(data, decode_lookup), #data % 4 > 0
+	return generic.decode(decode_lookup, data), #data % 4 > 0
 end
 
 return rfc

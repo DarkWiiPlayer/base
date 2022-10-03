@@ -1,6 +1,6 @@
 local base64 = {}
 
-function base64.decode(input, lookup)
+function base64.decode(lookup, input)
 	local buffer = {}
 	local length = math.floor(#input*6/8)
 	local bits = length*8 - #input*6
@@ -22,7 +22,7 @@ function base64.decode(input, lookup)
 	return table.concat(buffer)
 end
 
-function base64.encode(binary, lookup)
+function base64.encode(lookup, binary)
 	local buffer = {}
 	local length = math.ceil(#binary*8/6)
 	local acc = 0

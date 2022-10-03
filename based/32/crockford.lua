@@ -25,14 +25,14 @@ local decode_lookup = {
 -- @tparam string data A string treated as binary data
 -- @treturn string The Base32 encoded input data
 function crockford.encode(data)
-	return generic.encode(data, encode_lookup)
+	return generic.encode(encode_lookup, data)
 end
 
 --- Decodes a Base32-encoded binary string
 -- @tparam string data Base32 encoded data
 -- @treturn string The decoded input data
 function crockford.decode(data)
-	return generic.decode(data, decode_lookup)
+	return generic.decode(decode_lookup, data)
 end
 
 return crockford

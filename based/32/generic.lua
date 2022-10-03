@@ -1,6 +1,6 @@
 local base32 = {}
 
-function base32.decode(input, lookup)
+function base32.decode(lookup, input)
 	local buffer = {}
 	local length = math.floor(#input*5/8)
 	local bits = length*8 - #input*5
@@ -22,7 +22,7 @@ function base32.decode(input, lookup)
 	return table.concat(buffer)
 end
 
-function base32.encode(binary, lookup)
+function base32.encode(lookup, binary)
 	local buffer = {}
 	local length = math.ceil(#binary*8/5)
 	local acc = 0
