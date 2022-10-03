@@ -21,17 +21,19 @@ crockford.decode_lookup = {
 	30, 31
 }
 
---- Encodes a binary string into Base32
+--- Encodes a value into Base32.
+-- Supported types are `string` and `number`.
+-- Strings will be encoded byte-wise with padding bits at the end, while numbers will be encoded all at once with leading zeroes at the start.
 -- @tparam string data A string treated as binary data
 -- @treturn string The Base32 encoded input data
 function crockford.encode(data)
 	return generic.encode(crockford.encode_lookup, data)
 end
 
---- Decodes a Base32-encoded binary string
+--- Decodes a Base32-encoded value.
 -- @tparam string data Base32 encoded data
--- @tparam[opt="string"] string Either 'string' or 'number' to specify what type to decode as
--- @treturn string The decoded input data
+-- @tparam[opt="string"] string mode Either 'string' or 'number' to specify what type to decode as
+-- @return The decoded input data
 function crockford.decode(data, mode)
 	return generic.decode(crockford.decode_lookup, data, mode)
 end

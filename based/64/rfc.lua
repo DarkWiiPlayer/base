@@ -29,7 +29,9 @@ rfc.decode_lookup = {
 -- 	io.write(i%8==0 and ",\n" or ", ")
 -- end
 
---- Encodes a binary string into Base64
+--- Encodes a value into URL-Safe Base64.
+-- Supported types are `string` and `number`.
+-- Strings will be encoded byte-wise with padding bits at the end, while numbers will be encoded all at once with leading zeroes at the start.
 -- @tparam string data A string treated as binary data
 -- @treturn string The Base64 encoded input data
 function rfc.encode(data)
@@ -37,10 +39,10 @@ function rfc.encode(data)
 	return output .. string.rep("=", (4 - #output) % 4)
 end
 
---- Decodes a Base64-encoded binary string
+--- Decodes a Base64-encoded value.
 -- @tparam string data Base64 encoded data
--- @tparam[opt="string"] string Either 'string' or 'number' to specify what type to decode as
--- @treturn string The decoded input data
+-- @tparam[opt="string"] string mode Either 'string' or 'number' to specify what type to decode as
+-- @return The decoded input data
 -- @treturn boolean `true` if the input data was correctly padded, `false` otherwise
 function rfc.decode(data, mode)
 	local first_pad = data:find("=", 1, true)
