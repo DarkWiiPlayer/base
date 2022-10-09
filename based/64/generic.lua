@@ -9,6 +9,9 @@ function base64.decode(lookup, input, mode)
 		local buffer_pointer = length
 		for i=#input, 1, -1 do
 			local word6 = lookup[input:byte(i)]
+			if not word6 then
+				return nil, "Invalid character: " .. tostring(input:sub(i, i))
+			end
 			word6 = word6 * 2^bits
 			bits = bits + 6
 			acc = acc + word6

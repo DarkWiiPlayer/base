@@ -9,6 +9,9 @@ function base32.decode(lookup, input, mode)
 		local buffer_pointer = length
 		for i=#input, 1, -1 do
 			local word5 = lookup[input:byte(i)]
+			if not word5 then
+				return nil, "Invalid character: " .. tostring(input:sub(i, i))
+			end
 			word5 = word5 * 2^bits
 			bits = bits + 5
 			acc = acc + word5
