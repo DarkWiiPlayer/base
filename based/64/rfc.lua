@@ -31,7 +31,8 @@ rfc.decode_lookup = {
 
 --- Encodes a value into URL-Safe Base64.
 -- Supported types are `string` and `number`.
--- Strings will be encoded byte-wise with padding bits at the end, while numbers will be encoded all at once with leading zeroes at the start.
+-- Strings will be encoded byte-wise with padding bits at the end, while
+-- numbers will be encoded all at once with leading zeroes at the start.
 -- @tparam string data A string treated as binary data
 -- @treturn string The Base64 encoded input data
 function rfc.encode(data)
@@ -51,7 +52,7 @@ function rfc.decode(data, mode)
 		data = data:sub(1, first_pad - 1)
 	end
 
-	return generic.decode(rfc.decode_lookup, data), #data % 4 == 0
+	return generic.decode(rfc.decode_lookup, data, mode), #data % 4 == 0
 end
 
 return rfc

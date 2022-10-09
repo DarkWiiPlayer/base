@@ -1,6 +1,6 @@
 local base64 = {}
 
-function base64.decode(lookup, input)
+function base64.decode(lookup, input, mode)
 	if mode == "string" or mode == nil then
 		local buffer = {}
 		local length = math.floor(#input*6/8)

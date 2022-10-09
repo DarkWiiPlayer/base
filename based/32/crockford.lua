@@ -23,7 +23,8 @@ crockford.decode_lookup = {
 
 --- Encodes a value into Base32.
 -- Supported types are `string` and `number`.
--- Strings will be encoded byte-wise with padding bits at the end, while numbers will be encoded all at once with leading zeroes at the start.
+-- Strings will be encoded byte-wise with padding bits at the end, while
+-- numbers will be encoded all at once with leading zeroes at the start.
 -- @tparam string data A string treated as binary data
 -- @treturn string The Base32 encoded input data
 function crockford.encode(data)
