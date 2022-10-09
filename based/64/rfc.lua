@@ -51,7 +51,7 @@ function rfc.decode(data, mode)
 		data = data:sub(1, first_pad - 1)
 	end
 
-	return generic.decode(rfc.decode_lookup, data), #data % 4 > 0
+	return generic.decode(rfc.decode_lookup, data), #data % 4 == 0
 end
 
 return rfc
