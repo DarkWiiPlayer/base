@@ -52,7 +52,12 @@ function url.decode(data)
 		data = data:sub(1, first_pad - 1)
 	end
 
-	return generic.decode(url.decode_lookup, data), #data % 4 > 0
+	local result, err = generic.decode(rfc.decode_lookup, data, mode)
+	if result then
+		return result, #data % 4 == 0
+	else
+		return result, err
+	end
 end
 
 return url
