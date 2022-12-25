@@ -45,14 +45,14 @@ end
 -- @tparam[opt="string"] string mode Either 'string' or 'number' to specify what type to decode as
 -- @return The decoded input data
 -- @treturn boolean `true` if the input data was correctly padded, `false` otherwise
-function url.decode(data)
+function url.decode(data, mode)
 	local first_pad = data:find("=", 1, true)
 
 	if first_pad then
 		data = data:sub(1, first_pad - 1)
 	end
 
-	local result, err = generic.decode(rfc.decode_lookup, data, mode)
+	local result, err = generic.decode(url.decode_lookup, data, mode)
 	if result then
 		return result, #data % 4 == 0
 	else
