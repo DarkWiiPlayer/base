@@ -1,5 +1,5 @@
 package = "based"
-version = "dev-1"
+version = "dev-2"
 source = {
 	url = "git+https://github.com/darkwiiplayer/based"
 }
@@ -22,6 +22,7 @@ build = {
 		["based.32.crockford"] = "based/32/crockford.lua",
 		["based.32.generic"] = "based/32/generic.lua",
 		["based.64.generic"] = "based/64/generic.lua",
+		["based.64.url"] = "based/64/url.lua",
 		["based.64.rfc"] = "based/64/rfc.lua",
 	}
 }
