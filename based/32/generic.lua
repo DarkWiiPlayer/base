@@ -35,7 +35,7 @@ function base32.decode(lookup, input, mode)
 	end
 end
 
-function base32.encode(lookup, binary)
+function base32.encode(lookup, binary, length)
 	local buffer = {}
 	if type(binary) == "string" then
 		local length = math.ceil(#binary*8/5)
@@ -55,7 +55,8 @@ function base32.encode(lookup, binary)
 			end
 		end
 	elseif type(binary) == "number" then
-		for i=10, 1, -1 do
+		length = length or math.floor(math.log(binary, 32))+1
+		for i=length, 1, -1 do
 			local modulo = binary % 32
 			buffer[i] = lookup:sub(modulo + 1, modulo + 1)
 			binary = (binary - modulo) / 32

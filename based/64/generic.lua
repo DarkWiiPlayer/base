@@ -35,7 +35,7 @@ function base64.decode(lookup, input, mode)
 	end
 end
 
-function base64.encode(lookup, binary)
+function base64.encode(lookup, binary, length)
 	local buffer = {}
 	if type(binary) == "string" then
 		local length = math.ceil(#binary*8/6)
@@ -54,9 +54,9 @@ function base64.encode(lookup, binary)
 				buffer_pointer = buffer_pointer-1
 			end
 		end
-		return table.concat(buffer)
 	elseif type(binary) == "number" then
-		for i=10, 1, -1 do
+		length = length or math.floor(math.log(binary, 64))+1
+		for i=length, 1, -1 do
 			local modulo = binary % 64
 			buffer[i] = lookup:sub(modulo + 1, modulo + 1)
 			binary = (binary - modulo) / 64
@@ -64,6 +64,7 @@ function base64.encode(lookup, binary)
 	else
 		error("Cannot encode type, supported are 'string' and 'number', got " .. type(binary))
 	end
+	return table.concat(buffer)
 end
 
 return base64

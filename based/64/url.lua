@@ -36,8 +36,12 @@ url.decode_lookup = {
 -- @tparam string data A string treated as binary data
 -- @treturn string The Base64 encoded input data
 function url.encode(data)
-	local output = generic.encode(url.encode_lookup,  data)
-	return output .. string.rep("=", (4 - #output) % 4)
+	local output, err = generic.encode(url.encode_lookup,  data)
+	if output then
+		return output .. string.rep("=", (4 - #output) % 4)
+	else
+		return nil, err
+	end
 end
 
 --- Decodes an URL-Safe Base64-encoded value.
